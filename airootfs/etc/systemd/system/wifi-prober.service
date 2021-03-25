@@ -1,0 +1,11 @@
+[Unit]
+Description=Starts wifi adapter prober script
+Requires=NetworkManager.service
+After=NetworkManager.service
+
+[Service]
+Type=oneshot
+ExecStart=/etc/systemd/scripts/wifi-prober
+
+[Install]
+WantedBy=multi-user.target

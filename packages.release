@@ -1,0 +1,12 @@
+# SCREENSHOT
+maim
+
+# EXAMTOOL PACKAGE
+examtool
+
+# FONT NEEDED FOR NEW WEB GUI
+ttf-nunito
+
+# ZFS-related packages
+zfs-utils
+zfs-dkms

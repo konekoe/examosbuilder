@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Exec=/bin/examtool --intro
+X-GNOME-Autostart-enabled=true
+NoDisplay=false
+Hidden=false
+Name[en_US]=Examtool
+Comment[en_US]=Starts Examtool GUI application
+X-GNOME-Autostart-Delay=5

@@ -1,0 +1,162 @@
+# DEFAULT ARCHISO PACKAGES
+# arch-install-scripts
+b43-fwcutter
+# btrfs-progs
+# clonezilla
+crda
+# darkhttpd
+# ddrescue
+dhclient
+dhcpcd
+# dialog
+diffutils
+# dmraid
+# dnsmasq
+dnsutils
+# dosfstools
+# elinks
+ethtool
+# exfatprogs
+# f2fs-tools
+fsarchiver
+gnu-netcat
+gpm
+# gptfdisk
+# grml-zsh-config
+# grub
+hdparm
+ipw2100-fw
+ipw2200-fw
+# irssi
+# lftp
+libglvnd
+libx264
+# linux-atm
+linux-firmware
+# lsscsi
+lvm2
+man-db
+man-pages
+# mc
+mdadm
+mkinitcpio-archiso
+mtools
+nano
+ndisc6
+# netctl
+# nfs-utils
+# nilfs-utils
+# nmap
+ntfs-3g
+# ntp
+# openconnect
+openssh
+# openvpn
+# partclone
+# parted
+# partimage
+# ppp
+# pptpclient
+# refind-efi
+# rp-pppoe
+# rsync
+# sdparm
+# sg3_utils
+# smartmontools
+# speedtouch
+sudo
+systemd-resolvconf
+# tcpdump
+terminus-font
+# testdisk
+usb_modeswitch
+usbutils
+# vi
+vim-minimal
+# vpnc
+wget
+wireless-regdb
+wireless_tools
+# wvdial
+# xl2tpd
+
+
+
+# FONTS
+ttf-dejavu
+ttf-croscore
+gnu-free-fonts
+ttf-droid
+ttf-liberation
+ttf-ubuntu-font-family
+
+# XORG PACKAGES
+# these will install the mesa drivers
+xorg-server
+xorg-xinit
+xorg-twm
+xorg-xhost
+xterm
+
+# VIRTUALBOX
+# virtualbox-guest-utils
+
+# CINNAMON DE
+cinnamon
+
+# NETWORKING
+networkmanager
+# network-manager-applet
+
+# GNOME KEYRING FOR WIFI PASSWORD PROMPT
+gnome-keyring
+
+# useful programs
+gcc
+leafpad
+gedit
+tilix
+valgrind
+gnome-calculator
+libreoffice-still
+nemo-fileroller
+
+# WIFI packages
+broadcom-wl-dkms
+
+# additional GPU drivers
+xf86-video-amdgpu
+xf86-video-ati
+xf86-video-intel
+xf86-video-nouveau
+
+# DKMS packages
+dkms
+linux-headers
+linux-lts-headers
+
+# AUR PACKAGES
+macbook12-spi-driver-dkms
+
+# Booting from HD and cleanup hooks
+mkinitcpio-examiso-hd
+mkinitcpio-examiso-cleanup
+
+#python dev
+#eclipse-cpp
+#eclipse-pydev
+
+# code dev
+code
+
+# pycharm
+pycharm-community-edition
+
+# for C++ dbus comms
+dbus-cxx
+
+# examos utility package
+examos-utils
+
+# for better dock
+plank

@@ -1,0 +1,96 @@
+#!/bin/bash
+
+# WiFi-adapter and interface names
+WIFIADAPTER=$(lspci | grep -i network | awk 'match($0,"controller.*"){print substr($0,RSTART+12)}')
+WIFIINTERFACE=''
+
+# Kernel modules of different makers
+BROADCOM_MODULES="b43 b43legacy bcm43xx bcma brcm80211 brcmfmac brcmsmac ssb wl 117"
+BROADCOM_MODULES_NO_BCMA="b43 b43legacy bcm43xx brcm80211 brcmfmac brcmsmac ssb wl 117"
+
+# load a driver
+load_driver() {
+	modprobe $1
+}
+
+# unload all drivers
+unload_all() {
+	rmmod $1
+}
+
+# find the current WiFi adapter interface
+# This SHOULD set the WIFIINTERFACE empty
+# if nm can't find the interface
+find_wifi_interface() {
+	WIFIINTERFACE=''
+	output=$(nmcli -t device)
+	while read -r line; do
+		# change IFS for a moment (internal field separator)
+		IFSBACKUP=$IFS
+		IFS=':';
+		words=()
+		for word in $line
+		do
+			words+=("$word")
+			if [ $word == "wifi" ]
+			then
+				WIFIINTERFACE=${words[0]}
+			fi
+		done
+		IFS=$IFSBACKUP
+	done <<< "$output"
+}
+
+# try to find the interface initially
+find_wifi_interface
+
+# if interface is found
+if [[ ! -z $WIFIINTERFACE ]]
+then
+	exit 0
+fi
+
+# we want to check if the card is the spurious BCM43602
+if [[ $(lspci |grep BCM43602 |wc -l) -ne 0 ]]; then
+	modprobe brcmfmac
+	exit 0
+fi
+
+# also BCM4350 seems to be troublesome
+if [[ $(lspci |grep BCM4350 |wc -l) -ne 0 ]]; then
+	modprobe brcmfmac
+	exit 0
+fi
+
+# Go through Broadcom chips if the
+# lspci lists the chip as Broadcom one.
+if [[ $WIFIADAPTER = *"Broadcom"* ]]
+then
+	# first try with BCMA enabled.
+	unload_all "${BROADCOM_MODULES}"
+	load_driver bcma
+	for MODULE in $BROADCOM_MODULES_NO_BCMA
+	do
+		unload_all "${BROADCOM_MODULES_NO_BCMA}"
+		load_driver $MODULE
+		find_wifi_interface
+		if [[ ! -z $WIFIINTERFACE ]]
+		then
+			break
+		fi
+	done
+	# if bcma did not work, unload it and try without it
+	if [[ -z $WIFIINTERFACE ]]
+	then
+		for MODULE in $BROADCOM_MODULES
+		do
+			unload_all "${BROADCOM_MODULES}"
+			load_driver $MODULE
+			find_wifi_interface
+			if [[ ! -z $WIFIINTERFACE ]]
+			then
+				break
+			fi
+		done
+	fi
+fi

@@ -1,0 +1,4 @@
+# exclude work and out dirs 
+work/**
+out/**
+
